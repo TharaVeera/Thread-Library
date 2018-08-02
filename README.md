@@ -32,7 +32,7 @@ To ensure atomicity, threads own locks and condition variables (mutexes). The st
 **Thread_create** - This creates other threads after thread_inity. It also intializes threads' contexts and then saves it. Like thread_libinit, it makes the context by passing the the thread to the 'trampoline' function, where the thread will return and follow the deletion process explained above. <br/><br/>
 **ContextSwitch** - This pops off the next thread on ready queue and swaps contexts with the current thread.<br/>
 **Thread_yield** - This puts the current thread on the ready queue and context switches - allowing the next thread on the ready queue to run.<br/><br/>
-**Thread_signal**- This checks the (lock, cv) map to see if there are TCBs waiting on this mutext. If so,it removes the TCB at the front of the wait queue and places it on the ready queue. <br/><br/>
+**Thread_signal** - This checks the (lock, cv) map to see if there are TCBs waiting on this mutext. If so,it removes the TCB at the front of the wait queue and places it on the ready queue. <br/><br/>
 **Thread_broadcast** - Like thread_signal, this checks the lock, but instead it removes all of the TCBs on the wait queue and pushes them onto the ready queue. <br/><br/>
 **Thread_wait** - This pushes the current thread onto the (lock, cv) queue and then context switches.<br/>
 There two functions for thread_locks/thread_unlock. One with interrupts and one without interrupt. This was to not interfere with the interrupt disable/enable encasing in the thread_wait function.<br/><br/>
